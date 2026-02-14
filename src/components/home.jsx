@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();

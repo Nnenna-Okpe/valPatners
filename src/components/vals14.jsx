@@ -127,11 +127,11 @@ export default function Vals14() {
       img: img1,
     },
     {
-      id: 2,
+      id: 3,
       img: img2,
     },
     {
-      id: 3,
+      id: 4,
       video: video1,
     },
   ];
@@ -382,7 +382,7 @@ export default function Vals14() {
                       <>
                         <video
                           src={memory.video}
-                          className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer"
                           muted
                           loop
                           playsInline
@@ -416,11 +416,6 @@ export default function Vals14() {
                     )}
 
                     {/* Title Overlay */}
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                      <h3 className="text-lg font-semibold text-[#f5e6be]">
-                        {memory.title}
-                      </h3>
-                    </div>
                   </div>
                 ))}
               </section>
