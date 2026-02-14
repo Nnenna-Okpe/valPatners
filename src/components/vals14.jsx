@@ -17,6 +17,7 @@ import img1 from "../assets/images/1771021819433.jpg";
 import img2 from "../assets/images/1771021819440.jpg";
 import video1 from "../assets/images/VID-20260213-WA0019.mp4";
 import video2 from "../assets/images/VID-20260213-WA0020.mp4";
+import { Toaster, toast } from "react-hot-toast";
 
 // --- Constants ---
 const STAGES = [
@@ -180,6 +181,23 @@ export default function Vals14() {
 
   return (
     <div className="vals14 relative min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-[#120101] via-[#2d0202] to-black overflow-hidden p-4 text-white">
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            zIndex: 99999,
+            background: "linear-gradient(135deg, #2d0202, #4a0404)",
+            color: "#f5e6be",
+            border: "1px solid rgba(212,175,55,0.5)",
+            padding: "16px 24px",
+            borderRadius: "16px",
+            boxShadow: "0 0 40px rgba(212,175,55,0.4)",
+            fontSize: "18px",
+            fontWeight: "600",
+            letterSpacing: "0.5px",
+          },
+        }}
+      />
       <EmberFall />
 
       {/* Progress Bar */}
@@ -260,7 +278,8 @@ export default function Vals14() {
               </h2>
 
               <p className="text-lg text-[#f5e6be]/70 italic px-8">
-                "In the gallery of my soul, whose portrait hangs in the center?"
+                "In the gallery of your soul, whose portrait hangs in the
+                center?"
               </p>
 
               <div className="max-w-xs mx-auto space-y-6">
@@ -352,7 +371,7 @@ export default function Vals14() {
                 the dark.
               </p>
 
-              <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <section className="grid grid-cols-1 sm:grid-cols-2  gap-6">
                 {memories.map((memory) => (
                   <div
                     key={memory.id}
@@ -360,18 +379,34 @@ export default function Vals14() {
                   >
                     {/* Display video if memory.video exists, otherwise display image */}
                     {memory.video ? (
-                      <video
-                        src={memory.video}
-                        className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                        onClick={(e) => {
-                          const video = e.currentTarget;
-                          video.paused ? video.play() : video.pause();
-                        }}
-                      />
+                      <>
+                        <video
+                          src={memory.video}
+                          className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                          onClick={(e) => {
+                            const video = e.currentTarget;
+                            video.paused ? video.play() : video.pause();
+                          }}
+                        />
+
+                        {/* Play Button Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                          <div className="bg-black/50 backdrop-blur-sm rounded-full p-4 transition-all duration-300 group-hover:scale-110">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="white"
+                              className="w-8 h-8"
+                            >
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </>
                     ) : (
                       <img
                         src={memory.img}
@@ -380,7 +415,12 @@ export default function Vals14() {
                       />
                     )}
 
-                    {/* Overlay */}
+                    {/* Title Overlay */}
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                      <h3 className="text-lg font-semibold text-[#f5e6be]">
+                        {memory.title}
+                      </h3>
+                    </div>
                   </div>
                 ))}
               </section>
@@ -426,11 +466,30 @@ export default function Vals14() {
               <div className="flex flex-col md:flex-row items-center justify-center gap-8 relative min-h-[200px]">
                 <button
                   onClick={() =>
-                    alert(
-                      `A toast to love! 🍷 ${userName} said YES under the velvet moon.`,
+                    toast(
+                      (t) => (
+                        <div className="flex items-center gap-4">
+                          <span className="text-2xl animate-pulse">🍷</span>
+                          <div>
+                            <p className="text-lg font-semibold">
+                              A toast to love!
+                            </p>
+                            <p className="text-sm opacity-80">
+                              {userName} said YES under the velvet moon.
+                            </p>
+                          </div>
+                        </div>
+                      ),
+                      {
+                        duration: 4000,
+                      },
                     )
                   }
-                  className="px-14 py-5 bg-[#d4af37] text-[#2d0202] text-2xl font-bold shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:shadow-[0_0_60px_rgba(212,175,55,0.6)] transition-all transform hover:scale-110 active:scale-95 flex items-center space-x-3"
+                  className="px-14 py-5 bg-[#d4af37] text-[#2d0202] text-2xl font-bold 
+             shadow-[0_0_40px_rgba(212,175,55,0.4)] 
+             hover:shadow-[0_0_60px_rgba(212,175,55,0.6)] 
+             transition-all transform hover:scale-110 active:scale-95 
+             flex items-center space-x-3"
                 >
                   <Wine size={24} />
                   <span>Always. ❤️</span>
